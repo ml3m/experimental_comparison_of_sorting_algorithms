@@ -97,10 +97,10 @@ class QuickSort(_Template):
     def _do(self):
         self._rek(0, len(self._sortingList)-1)
     
-    def _rek(self, links, rechts):
-        li = links
-        re = rechts
-        vergl = self._sortingList[int((links + rechts) / 2)]
+    def _rek(self, left, right):
+        li = left
+        re = right
+        vergl = self._sortingList[int((left + right) / 2)]
 
         first = True
         while first or li <= re:
@@ -113,10 +113,10 @@ class QuickSort(_Template):
                 self._exchangeByIndex(li, re)
                 li += 1
                 re -= 1
-        if links < re:
-            self._rek(links, re)
-        if rechts > li:
-            self._rek(li, rechts)
+        if left < re:
+            self._rek(left, re)
+        if right > li:
+            self._rek(li, right)
 
 class MergeSort(_Template):
     def _do(self):

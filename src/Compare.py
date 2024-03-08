@@ -1,23 +1,22 @@
-# https://arnehannappel.de/blog/sortieralgorithmen-vergleich
-
 from PySortAlgos import BubbleSort, SelectionSort, InsertSort, QuickSort, MergeSort, HeapSort, isSorted
 
 import time, random
 
+
 TEST_E = 30 # ~ 1bil only for test puposes
-START_E = 26 # 2^2 = 4
-MAX_E = 27 # 2^22 = 4.194.304
+START_E = 24 # 2^2 = 4
+MAX_E = 30 # 2^22 = 4.194.304
 TRIES = 1  # default will be 1, maybe a better implementation for final paper
 
 TOTEST = (
     
    #(Class,         Name,            Max)
-    #(BubbleSort,    "BubbleSort",    16),
-    #(SelectionSort, "SelectionSort", 16),
-    #(InsertSort,    "InsertSort",    20),
-    #(HeapSort,      "HeapSort",      29),
-    #(MergeSort,     "MergeSort",     29),
-    (QuickSort,     "QuickSort",     27),
+   # (BubbleSort,    "BubbleSort",    17),
+   # (SelectionSort, "SelectionSort", 17),
+   # (InsertSort,    "InsertSort",    18),
+    (HeapSort,      "HeapSort",      30),
+    (MergeSort,     "MergeSort",     30),
+    (QuickSort,     "QuickSort",     30),
     )
 
 # printing of the top categories
