@@ -51,13 +51,6 @@ class _Template(object):
         raise NotImplementedError
 
 
-#class BadAlgorithm(_Template):
-#    ## WARNING! DON'T USE THIS FUNCTION FOR MORE THEN 8 ELEMENTS!!!
-#    
-#    def _do(self):
-#        while not isSorted(self._sortingList, self._compare, self._key, self._ascending):
-#            random.shuffle(self._sortingList)
-
 class BubbleSort(_Template):
     def _do(self):
         for i in range(0, len(self._sortingList)-1):
@@ -175,5 +168,6 @@ class HeapSort(_Template):
             self._exchangeByIndex(0, i)
             self.drain(0, 0, i-1)
 
+# further classes of sorting algorithms can be implemented down bellow
 #class CountSort(_Template):
 #    def _do(self):

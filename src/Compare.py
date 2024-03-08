@@ -21,17 +21,15 @@ TEST_E = 30 # ~ 1bil only for test puposes
 START_E = 2 # 2^2 = 4
 MAX_E = 16 # 2^22 = 4.194.304
 TRIES = 1  # default will be 1, maybe a better implementation for final paper
-
 TOTEST = (
-    
-   #(Class,         Name,            Max)
-   # (BubbleSort,    "BubbleSort",    17),
-   # (SelectionSort, "SelectionSort", 17),
-   # (InsertSort,    "InsertSort",    18),
+#   (algorithm(class),  Name,       Limit)
+    (BubbleSort,    "BubbleSort",    17),
+    (SelectionSort, "SelectionSort", 17),
+    (InsertSort,    "InsertSort",    18),
     (HeapSort,      "HeapSort",      16),
     (MergeSort,     "MergeSort",     16),
     (QuickSort,     "QuickSort",     16),
-    )
+)
 
 # printing of the top categories
 #nameList = ""
