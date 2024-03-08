@@ -35,13 +35,10 @@ class _Template(object):
         tmp = self._sortingList[a]
         self._sortingList[a] = self._sortingList[b]
         self._sortingList[b] = tmp
-    
+
     def _copyList(self, fr):
-        to = []
-        for e in fr:
-            to.append(e)
-        return to
-    
+        return list(fr)
+
     def sort(self, o, cloneBeforeSort=True):
         self._sortingInput = o
         self._sortingList = self._copyList(o) if cloneBeforeSort else o
@@ -177,3 +174,6 @@ class HeapSort(_Template):
         for i in range(len(self._sortingList))[::-1]:
             self._exchangeByIndex(0, i)
             self.drain(0, 0, i-1)
+
+#class CountSort(_Template):
+#    def _do(self):
