@@ -40,8 +40,6 @@ nameList = "\t\t".join(r[1] for r in TOTEST)
 print("Elements\t\t" + nameList)
 # main 
 
-# l  ~   list_to_sort
-
 
 e = START_E
 # process until limit MAX_E is reached.
@@ -62,21 +60,23 @@ while e <= MAX_E:
 
                 # time started
                 t1 = time.time()
-                sortedlist = algorithm().sort(list_to_sort) #sort by r[0] which is the class algorithm
-                                            #apply method .sort from that class to list_to_sort - list of values
+                sortedlist = algorithm().sort(list_to_sort) 
+                # sort by r[0] which is the class algorithm
+                # apply method .sort from that class to list_to_sort - list of values
 
                 sum += time.time() - t1     # sum = the times used for sum/ TRIES
-                # just to make sure 
+                # just to make sure
                 if not isSorted(sortedlist):
                     print("Error in " + name)
 
-
-# what does it do?
+# finds the avg of all tries and then display it bellow
+# if TRIES = 1 -> useless
             res.append(sum / TRIES)
             if res[-1] > max:
                 max = res[-1]
 
 # printing this happens after each 2^e and e+=1 
+# prercentage calculation     
     tp = "2^" + str(e) + " = " + str(2**e) + " \t\t"
     for v in res:
         if v == None:
@@ -89,10 +89,6 @@ while e <= MAX_E:
             if v == 0: tp += "   "
         tp += "    \t"
     print(tp)
-
-# 2^e++ basicaly
     e += 1
-       
 
-# end
 print("\nFinish :)")

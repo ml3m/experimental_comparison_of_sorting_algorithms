@@ -1,7 +1,16 @@
-# sorting algorithms file 
+##############################################
+#				                    	     #
+#    Experimental Comparison                 # 
+#               of Sorting Algorithms        # 
+#              				                 # 
+#		        github.com/ml3m		         #
+#					                         #
+##############################################
+
+# work still in progress, more sorting algorithms to be added..
+
 import math, random
 
-# default 
 _defaultCompare = lambda x, y: x - y
 _defaultKey = lambda a: a
 
@@ -19,7 +28,6 @@ class _Template(object):
         self._compare = compare
         self._key = key
         self._ascending = ascending
-        
         self._sortingInput = None
         self._sortingList = []
     
@@ -39,12 +47,11 @@ class _Template(object):
     def _copyList(self, fr):
         return list(fr)
 
+# main sorting method used on all of the algorithms bellow
     def sort(self, o, cloneBeforeSort=True):
         self._sortingInput = o
         self._sortingList = self._copyList(o) if cloneBeforeSort else o
-        
         self._do()
-        
         return self._sortingList
     
     def _do(self):
