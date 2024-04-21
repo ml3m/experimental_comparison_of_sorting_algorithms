@@ -1,8 +1,8 @@
 ##############################################
 #				                    	     #
-#    Experimental Comparison                 # 
-#               of Sorting Algorithms        # 
-#              				                 # 
+#    Experimental Comparison                 #
+#               of Sorting Algorithms        #
+#              				                 #
 #		        github.com/ml3m		         #
 #					                         #
 ##############################################
@@ -175,6 +175,140 @@ class HeapSort(_Template):
             self._exchangeByIndex(0, i)
             self.drain(0, 0, i-1)
 
-# further classes of sorting algorithms can be implemented down bellow
-#class CountSort(_Template):
-#    def _do(self):
+class Timsort(_Template):
+    MIN_MERGE = 32
+
+    def _insertion_sort(self, arr, start, end):
+        for i in range(start + 1, end + 1):
+            key = arr[i]
+            j = i - 1
+            while j >= start and self._compareElements(arr[j], key) > 0:
+                arr[j + 1] = arr[j]
+                j -= 1
+            arr[j + 1] = key
+
+    def _merge(self, arr, l, m, r):
+        len1, len2 = m - l + 1, r - m
+        left, right = arr[l:l + len1], arr[m + 1:m + 1 + len2]
+
+        i, j, k = 0, 0, l
+
+        while i < len1 and j < len2:
+            if self._compareElements(left[i], right[j]) <= 0:
+                arr[k] = left[i]
+                i += 1
+            else:
+                arr[k] = right[j]
+                j += 1
+            k += 1
+
+        while i < len1:
+            arr[k] = left[i]
+            i += 1
+            k += 1
+
+        while j < len2:
+            arr[k] = right[j]
+            j += 1
+            k += 1
+
+    def _do(self):
+        min_run = self.MIN_MERGE
+        n = len(self._sortingList)
+
+        # Insertion sort on small subarrays
+        for start in range(0, n, min_run):
+            end = min(start + min_run - 1, n - 1)
+            self._insertion_sort(self._sortingList, start, end)
+
+        # Merge sort on larger subarrays
+        size = min_run
+        while size < n:
+            for start in range(0, n, size * 2):
+                mid = min(n - 1, start + size - 1)
+                end = min(n - 1, mid + size)
+                if mid < end:
+                    self._merge(self._sortingList, start, mid, end)
+            size *= 2
+
+class SmoothSort(_Template):
+    def _siftdown(self, start, end):
+        root = start
+
+        while root * 2 + 1 <= end:
+            child = root * 2 + 1
+            swap = root
+
+            if self._compareByIndex(swap, child) < 0:
+                swap = child
+
+            if child + 1 <= end and self._compareByIndex(swap, child + 1) < 0:
+                swap = child + 1
+
+            if swap == root:
+                return
+            else:
+                self._exchangeByIndex(root, swap)
+                root = swap
+
+    def _do(self):
+        n = len(self._sortingList)
+        
+        # Build heap
+        for i in range(n // 2 - 1, -1, -1):
+            self._siftdown(i, n - 1)
+        
+        # Smooth down heap
+        for i in range(n - 1, 0, -1):
+            self._exchangeByIndex(0, i)
+            self._siftdown(0, i - 1)
+
+class RadixSort(_Template):
+    def _do(self):
+        maximum = max(self._sortingList)
+        exp = 1
+        while maximum // exp > 0:
+            self._do_radix(self._sortingList, exp)
+            exp *= 10
+
+    def _do_radix(self, arr, exp):
+        n = len(arr)
+        output = [0] * n
+        count = [0] * 10
+
+        for i in range(n):
+            index = arr[i] // exp
+            count[index % 10] += 1
+
+        for i in range(1, 10):
+            count[i] += count[i - 1]
+
+        i = n - 1
+        while i >= 0:
+            index = arr[i] // exp
+            output[count[index % 10] - 1] = arr[i]
+            count[index % 10] -= 1
+            i -= 1
+
+        for i in range(0, len(arr)):
+            arr[i] = output[i]
+
+class CombSort(_Template):
+    def _do(self):
+        n = len(self._sortingList)
+        gap = n
+        shrink = 1.3
+        sorted = False
+
+        while not sorted:
+            gap = int(gap / shrink)
+            if gap <= 1:
+                gap = 1
+                sorted = True
+
+            i = 0
+            while i + gap < n:
+                if self._compareByIndex(i, i + gap) > 0:
+                    self._exchangeByIndex(i, i + gap)
+                    sorted = False
+                i += 1

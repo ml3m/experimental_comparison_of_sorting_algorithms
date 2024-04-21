@@ -23,21 +23,21 @@ import time
 import random
 
 TEST_E = 30  # ~ 1bil only for test puposes
-START_E = 2  # 2^2 = 4
-MAX_E = 14  # 2^22 = 4.194.304
+START_E = 3  # 2^2 = 4
+MAX_E = 10  # 2^22 = 4.194.304
 TRIES = 1  # default will be 1, maybe a better implementation for final paper
 TOTEST = (
     # (algorithm(class),  Name,       Limit)
-    (BubbleSort,    "BubbleSort",    14),
-    (SelectionSort, "SelectionSort", 14),
-    (InsertSort,    "InsertSort",    14),
-    (HeapSort,      "HeapSort",      14),
-    (MergeSort,     "MergeSort",     14),
-    (QuickSort,     "QuickSort",     14),
-    (RadixSort,     "RadixSort",     14),
-    (SmoothSort,    "SmoothSort",    14),
-    (Timsort,       "Timsort",       14),
-    (CombSort,      "CombSort",      14)
+    (BubbleSort,    "BubbleSort",    10),
+    (SelectionSort, "SelectionSort", 10),
+    (InsertSort,    "InsertSort",    10),
+    (HeapSort,      "HeapSort",      10),
+    (MergeSort,     "MergeSort",     10),
+    (QuickSort,     "QuickSort",     10),
+    (RadixSort,     "RadixSort",     10),
+    (SmoothSort,    "SmoothSort",    10),
+    (Timsort,       "Timsort",       10),
+    (CombSort,      "CombSort",      10)
 )
 
 # printing of the top categories
@@ -49,15 +49,28 @@ nameList = "\t\t".join(r[1] for r in TOTEST)
 print("Elements\t\t" + nameList)
 # main
 
+def quickselect(arr, k):
+    if len(arr) == 1:
+        return arr[0]
+    pivot = random.choice(arr)
+    lows = [x for x in arr if x < pivot]
+    highs = [x for x in arr if x > pivot]
+    pivots = [x for x in arr if x == pivot]
+
+    if k < len(lows):
+        return quickselect(lows, k)
+    elif k < len(lows) + len(pivots):
+        return pivots[0]
+    else:
+        return quickselect(highs, k - len(lows) - len(pivots))
+
 list_kind = 1
 print_ok1 = False
 print_ok2 = False
 print_ok3 = False
-print_ok4 = False
-print_ok5 = False
 
 # process until limit MAX_E is reached.
-while list_kind <= 5:
+while list_kind <= 4:
     e = START_E
     while e <= MAX_E:
         res = []
@@ -98,27 +111,18 @@ while list_kind <= 5:
                         aux = list_to_sort[choice1]
                         list_to_sort[choice1] = list_to_sort[choice2]
                         list_to_sort[choice1] = aux
-
-                    elif list_kind == 3:
+                    elif list_to_sort == 3:
                         # reversed Sorted
-                        if print_ok3 is False:
-                            print("\n\n\tReversed Sorted\n\n")
-                            print_ok3 = True
 
                         list_to_sort = list(range(0, 2**e))
                         list_to_sort = list_to_sort[::-1]
-                    elif list_kind == 4:
-                        if print_ok4 is False:
-                            # Already sorted
-                            print("\n\n\tSorted\n\n")
-                            print_ok4 = True
-                        list_to_sort = list(range(0, 2**e))
                     else:
-                        if print_ok5 is False:
-                            print("\n\n\t0 and 1 shuffled Array\n\n")
-                            print_ok5 = True
-                        list_to_sort = [random.randint(0, 1) for _ in range(2**e)]
+                        # Already sorted
 
+                        if print_ok3 is False:
+                            print("\n\n\tSorted\n\n")
+                            print_ok3 = True
+                        list_to_sort = list(range(0, 2**e))
                     
                     # time started
                     t1 = time.time()
