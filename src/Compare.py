@@ -23,21 +23,21 @@ import time
 import random
 
 TEST_E = 30  # ~ 1bil only for test puposes
-START_E = 3  # 2^2 = 4
-MAX_E = 12  # 2^22 = 4.194.304
-TRIES = 5  # default will be 1, maybe a better implementation for final paper
+START_E = 9  # 2^2 = 4
+MAX_E = 14  # 2^22 = 4.194.304
+TRIES = 10  # default will be 1, maybe a better implementation for final paper
 TOTEST = (
      #(algorithm(class),  Name,       Limit)
-    (BubbleSort,    "BubbleSort",    12),
-    (SelectionSort, "SelectionSort", 12),
-    (InsertSort,    "InsertSort",    12),
-    (HeapSort,      "HeapSort",      12),
-    (MergeSort,     "MergeSort",     12),
-    (QuickSort,     "QuickSort",     12),
-    (RadixSort,     "RadixSort",     12),
-    (SmoothSort,    "SmoothSort",    12),
-    (Timsort,       "Timsort",       12),
-    (CombSort,      "CombSort",      12)
+    (BubbleSort,    "BubbleSort",    14),
+    (SelectionSort, "SelectionSort", 14),
+    (InsertSort,    "InsertSort",    14),
+    (HeapSort,      "HeapSort",      14),
+    (MergeSort,     "MergeSort",     14),
+    (QuickSort,     "QuickSort",     14),
+    (RadixSort,     "RadixSort",     14),
+    (SmoothSort,    "SmoothSort",    14),
+    (Timsort,       "Timsort",       14),
+    (CombSort,      "CombSort",      14)
 )
 
 # printing of the top categories
@@ -95,8 +95,9 @@ while list_kind <= 5:
                         random.shuffle(list_to_sort)
                         # need to get a better way here
                         while True:
-                            choice1 = random.choice(list_to_sort)
-                            choice2 = random.choice(list_to_sort)
+                            list_length = len(list_to_sort)
+                            choice1 = random.choice(list(range(0, list_length - 1)))
+                            choice2 = random.choice(list(range(0, list_length - 1)))
                             if choice1 != choice2:
                                 break
 
