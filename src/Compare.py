@@ -23,21 +23,21 @@ import time
 import random
 
 TEST_E = 30  # ~ 1bil only for test puposes
-START_E = 2  # 2^2 = 4
-MAX_E = 14  # 2^22 = 4.194.304
-TRIES = 1  # default will be 1, maybe a better implementation for final paper
+START_E = 3  # 2^2 = 4
+MAX_E = 12  # 2^22 = 4.194.304
+TRIES = 5  # default will be 1, maybe a better implementation for final paper
 TOTEST = (
-    # (algorithm(class),  Name,       Limit)
-    (BubbleSort,    "BubbleSort",    14),
-    (SelectionSort, "SelectionSort", 14),
-    (InsertSort,    "InsertSort",    14),
-    (HeapSort,      "HeapSort",      14),
-    (MergeSort,     "MergeSort",     14),
-    (QuickSort,     "QuickSort",     14),
-    (RadixSort,     "RadixSort",     14),
-    (SmoothSort,    "SmoothSort",    14),
-    (Timsort,       "Timsort",       14),
-    (CombSort,      "CombSort",      14)
+     #(algorithm(class),  Name,       Limit)
+    (BubbleSort,    "BubbleSort",    12),
+    (SelectionSort, "SelectionSort", 12),
+    (InsertSort,    "InsertSort",    12),
+    (HeapSort,      "HeapSort",      12),
+    (MergeSort,     "MergeSort",     12),
+    (QuickSort,     "QuickSort",     12),
+    (RadixSort,     "RadixSort",     12),
+    (SmoothSort,    "SmoothSort",    12),
+    (Timsort,       "Timsort",       12),
+    (CombSort,      "CombSort",      12)
 )
 
 # printing of the top categories
@@ -55,6 +55,10 @@ print_ok2 = False
 print_ok3 = False
 print_ok4 = False
 print_ok5 = False
+
+def generate_random_list(length):
+    return [random.randint(0, 999999) for _ in range(length)]
+
 
 # process until limit MAX_E is reached.
 while list_kind <= 5:
@@ -78,7 +82,7 @@ while list_kind <= 5:
                             print("\n\n\tShuffled\n\n")
                             print_ok1 = True
 
-                        list_to_sort = list(range(0, 2**e))
+                        list_to_sort = generate_random_list(2**e)
                         random.shuffle(list_to_sort)
                     elif list_kind == 2:
                         # Almost Sorted
@@ -87,8 +91,9 @@ while list_kind <= 5:
                             print("\n\n\tAlmost Sorted\n\n")
                             print_ok2 = True
 
-                        list_to_sort = list(range(0, 2**e))
+                        list_to_sort = generate_random_list(2**e)
                         random.shuffle(list_to_sort)
+                        # need to get a better way here
                         while True:
                             choice1 = random.choice(list_to_sort)
                             choice2 = random.choice(list_to_sort)
@@ -105,14 +110,15 @@ while list_kind <= 5:
                             print("\n\n\tReversed Sorted\n\n")
                             print_ok3 = True
 
-                        list_to_sort = list(range(0, 2**e))
+
+                        list_to_sort = generate_random_list(2**e)
                         list_to_sort = list_to_sort[::-1]
                     elif list_kind == 4:
                         if print_ok4 is False:
                             # Already sorted
                             print("\n\n\tSorted\n\n")
                             print_ok4 = True
-                        list_to_sort = list(range(0, 2**e))
+                        list_to_sort = generate_random_list(2**e)
                     else:
                         if print_ok5 is False:
                             print("\n\n\t0 and 1 shuffled Array\n\n")
@@ -133,6 +139,7 @@ while list_kind <= 5:
     
     # finds the avg of all tries and then display it bellow
     # if TRIES = 1 -> useless
+    
                 res.append(sum / TRIES)
                 if res[-1] > max:
                     max = res[-1]
@@ -147,7 +154,7 @@ while list_kind <= 5:
                 p = "0"
                 if max > 0:
                     p = str(round(100*v/max, 2))
-                tp += str(round(v, 5)) + "s (" + p + "%)"
+                tp += "{:.8f}s ({:.2f}%)".format(v, float(p))
                 if v == 0: tp += "   "
             tp += "    \t"
         print(tp)

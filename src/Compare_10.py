@@ -94,7 +94,8 @@ while e <= MAX_E:
             if max > 0:
                 p = str(round(100*v/max, 2))
             tp += str(round(v, 5)) + "s (" + p + "%)"
-            if v == 0: tp += "   "
+            if v == 0: 
+                tp += "   "
         tp += "    \t"
     print(tp)
     e += 1
