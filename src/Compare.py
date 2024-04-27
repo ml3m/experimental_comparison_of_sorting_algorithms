@@ -5,7 +5,6 @@
 ##############################################
 import time
 import random
-
 from PySortAlgos import (BubbleSort,
                          SelectionSort,
                          InsertSort,
@@ -31,23 +30,21 @@ from PySortAlgos import (BubbleSort,
 
 
 START_E = 3  # 2^START_E (paper choice: 2^3 = 8)
-MAX_E = 14  # 2^MAX_E (paper choice: 2^14 = 16384)
-TRIES = 100  # precision average of how many tries
+MAX_E = 8  # 2^MAX_E (paper choice: 2^8 = 16384)
+TRIES = 1  # precision average of how many tries
 TOTEST = (
      #(algorithm(class),  Name,       Limit)
-    (BubbleSort,    "BubbleSort",    14),
-    (SelectionSort, "SelectionSort", 14),
-    (InsertSort,    "InsertSort",    14),
-    (HeapSort,      "HeapSort",      14),
-    (MergeSort,     "MergeSort",     14),
-    (QuickSort,     "QuickSort",     14),
-    (RadixSort,     "RadixSort",     14),
-    (SmoothSort,    "SmoothSort",    14),
-    (Timsort,       "Timsort",       14),
-    (CombSort,      "CombSort",      14)
+    (BubbleSort,    "BubbleSort",    8),
+    (SelectionSort, "SelectionSort", 8),
+    (InsertSort,    "InsertSort",    8),
+    (HeapSort,      "HeapSort",      8),
+    (MergeSort,     "MergeSort",     8),
+    (QuickSort,     "QuickSort",     8),
+    (RadixSort,     "RadixSort",     8),
+    (SmoothSort,    "SmoothSort",    8),
+    (Timsort,       "Timsort",       8),
+    (CombSort,      "CombSort",      8)
 )
-
-
 
 # printing of the top categories
 # nameList = ""
@@ -57,19 +54,25 @@ nameList = "\t\t".join(r[1] for r in TOTEST)
 
 print("Elements\t\t" + nameList)
 
-list_kind = 1
+def generate_random_list(length):
+    """the function that generates a list with random number from range (0, 999999), assuring a correct testing on totally random numbers"""
+    return [random.randint(0, 999999) for _ in range(length)]
+
+def generate_random_list_small_range(length):
+    """used for list_kind==5"""
+    return [random.randint(0, 10) for _ in range(length)]
+
 print_ok1 = False
 print_ok2 = False
 print_ok3 = False
 print_ok4 = False
 print_ok5 = False
+print_ok6 = False
 
-def generate_random_list(length):
-    """the function that generates a list with random number from range (0, 999999), assuring a correct testing on totally random numbers"""
-    return [random.randint(0, 999999) for _ in range(length)]
+list_kind = 1
 
 # doing the process for each type of list 
-while list_kind <= 1:
+while list_kind <= 6:
     e = START_E
     # process until limit MAX_E is reached by e.
     while e <= MAX_E:
@@ -82,18 +85,18 @@ while list_kind <= 1:
             else:
                 sum = 0
                 for _ in range(TRIES):
-                    # create a list with 2^e Elements
+                     # create a list with 2^e Elements
                     
-                    #if list_kind == 1:
-                    #    # Shuffled
-                    #    
-                    #    if print_ok1 is False:
-                    #        print("\n\n\tShuffled\n\n")
-                    #        print_ok1 = True
-
-                    #    list_to_sort = generate_random_list(2**e)
-                    #    random.shuffle(list_to_sort)
                     if list_kind == 1:
+                        # Shuffled
+                        
+                        if print_ok1 is False:
+                            print("\n\n\tShuffled\n\n")
+                            print_ok1 = True
+
+                        list_to_sort = generate_random_list(2**e)
+                        random.shuffle(list_to_sort)
+                    elif list_kind == 2:
                         # Almost Sorted
 
                         if print_ok2 is False:
@@ -115,28 +118,37 @@ while list_kind <= 1:
                         list_to_sort[choice2] = aux
                         # bug fixed
 
-                    #elif list_kind == 3:
-                    #    # reversed Sorted
+                    elif list_kind == 3:
+                        # reversed Sorted
 
-                    #    if print_ok3 is False:
-                    #        print("\n\n\tReversed Sorted\n\n")
-                    #        print_ok3 = True
+                        if print_ok3 is False:
+                            print("\n\n\tReversed Sorted\n\n")
+                            print_ok3 = True
 
 
-                    #    list_to_sort = generate_random_list(2**e)
-                    #    list_to_sort = list_to_sort[::-1]
-                    #elif list_kind == 4:
-                    #    # Already sorted
+                        list_to_sort = generate_random_list(2**e)
+                        list_to_sort = list_to_sort[::-1]
+                    elif list_kind == 4:
+                        # Already sorted
 
-                    #    if print_ok4 is False:
-                    #        print("\n\n\tSorted\n\n")
-                    #        print_ok4 = True
-                    #    list_to_sort = generate_random_list(2**e)
-                    #else:
-                    #    if print_ok5 is False:
-                    #        print("\n\n\t0 and 1 shuffled Array\n\n")
-                    #        print_ok5 = True
-                    #    list_to_sort = [random.randint(0, 1) for _ in range(2**e)]
+                        if print_ok4 is False:
+                            print("\n\n\tSorted\n\n")
+                            print_ok4 = True
+                        list_to_sort = generate_random_list(2**e)
+                        list_to_sort.sort()
+                    elif list_kind == 5:
+                        # small range array 1-10
+                        if print_ok5 is False:
+                            print("\n\n\tsmall range array shuffled 0-10\n\n")
+                            print_ok5 = True
+                        list_to_sort = generate_random_list_small_range(2**e)
+
+                    else:
+                        if print_ok6 is False:
+                            print("\n\n\t0 and 1 shuffled Array\n\n")
+                            print_ok6 = True
+                        list_to_sort = [random.randint(0, 1) for _ in range(2**e)]
+
 
                     
                     # time started
