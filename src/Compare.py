@@ -32,7 +32,7 @@ from PySortAlgos import (BubbleSort,
 
 START_E = 3  # 2^START_E (paper choice: 2^3 = 8)
 MAX_E = 14  # 2^MAX_E (paper choice: 2^14 = 16384)
-TRIES = 10  # precision average of how many tries
+TRIES = 100  # precision average of how many tries
 TOTEST = (
      #(algorithm(class),  Name,       Limit)
     (BubbleSort,    "BubbleSort",    14),
@@ -69,7 +69,7 @@ def generate_random_list(length):
     return [random.randint(0, 999999) for _ in range(length)]
 
 # doing the process for each type of list 
-while list_kind <= 5:
+while list_kind <= 1:
     e = START_E
     # process until limit MAX_E is reached by e.
     while e <= MAX_E:
@@ -84,16 +84,16 @@ while list_kind <= 5:
                 for _ in range(TRIES):
                     # create a list with 2^e Elements
                     
-                    if list_kind == 1:
-                        # Shuffled
-                        
-                        if print_ok1 is False:
-                            print("\n\n\tShuffled\n\n")
-                            print_ok1 = True
+                    #if list_kind == 1:
+                    #    # Shuffled
+                    #    
+                    #    if print_ok1 is False:
+                    #        print("\n\n\tShuffled\n\n")
+                    #        print_ok1 = True
 
-                        list_to_sort = generate_random_list(2**e)
-                        random.shuffle(list_to_sort)
-                    elif list_kind == 2:
+                    #    list_to_sort = generate_random_list(2**e)
+                    #    random.shuffle(list_to_sort)
+                    if list_kind == 1:
                         # Almost Sorted
 
                         if print_ok2 is False:
@@ -101,7 +101,7 @@ while list_kind <= 5:
                             print_ok2 = True
 
                         list_to_sort = generate_random_list(2**e)
-                        random.shuffle(list_to_sort)
+                        list_to_sort.sort()
 
                         while True:
                             list_length = len(list_to_sort)
@@ -115,28 +115,28 @@ while list_kind <= 5:
                         list_to_sort[choice2] = aux
                         # bug fixed
 
-                    elif list_kind == 3:
-                        # reversed Sorted
+                    #elif list_kind == 3:
+                    #    # reversed Sorted
 
-                        if print_ok3 is False:
-                            print("\n\n\tReversed Sorted\n\n")
-                            print_ok3 = True
+                    #    if print_ok3 is False:
+                    #        print("\n\n\tReversed Sorted\n\n")
+                    #        print_ok3 = True
 
 
-                        list_to_sort = generate_random_list(2**e)
-                        list_to_sort = list_to_sort[::-1]
-                    elif list_kind == 4:
-                        # Already sorted
+                    #    list_to_sort = generate_random_list(2**e)
+                    #    list_to_sort = list_to_sort[::-1]
+                    #elif list_kind == 4:
+                    #    # Already sorted
 
-                        if print_ok4 is False:
-                            print("\n\n\tSorted\n\n")
-                            print_ok4 = True
-                        list_to_sort = generate_random_list(2**e)
-                    else:
-                        if print_ok5 is False:
-                            print("\n\n\t0 and 1 shuffled Array\n\n")
-                            print_ok5 = True
-                        list_to_sort = [random.randint(0, 1) for _ in range(2**e)]
+                    #    if print_ok4 is False:
+                    #        print("\n\n\tSorted\n\n")
+                    #        print_ok4 = True
+                    #    list_to_sort = generate_random_list(2**e)
+                    #else:
+                    #    if print_ok5 is False:
+                    #        print("\n\n\t0 and 1 shuffled Array\n\n")
+                    #        print_ok5 = True
+                    #    list_to_sort = [random.randint(0, 1) for _ in range(2**e)]
 
                     
                     # time started
