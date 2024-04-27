@@ -112,7 +112,8 @@ while list_kind <= 5:
 
                         aux = list_to_sort[choice1]
                         list_to_sort[choice1] = list_to_sort[choice2]
-                        list_to_sort[choice1] = aux
+                        list_to_sort[choice2] = aux
+                        # bug fixed
 
                     elif list_kind == 3:
                         # reversed Sorted
