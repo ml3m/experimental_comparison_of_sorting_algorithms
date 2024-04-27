@@ -29,6 +29,7 @@ from PySortAlgos import (BubbleSort,
 #       cause the printing is still a bit of a mess, didn't bothered with beautify
 #           cause I just edit it with vim for the paper
 
+
 START_E = 3  # 2^START_E (paper choice: 2^3 = 8)
 MAX_E = 14  # 2^MAX_E (paper choice: 2^14 = 16384)
 TRIES = 10  # precision average of how many tries
