@@ -4,7 +4,7 @@ This repository contains code for conducting experimental comparisons of various
 
 ## Introduction
 
-Sorting algorithms are fundamental to computer science and are used extensively in various applications. This project provides a framework to evaluate the efficiency of sorting algorithms by measuring their execution time under different scenarios.
+Sorting algorithms are fundamental to computer science and are used extensively in various applications. This project provides a Benchmark to evaluate the efficiency of sorting algorithms by measuring their execution time under different scenarios.
 
 ## Table of Contents
 
