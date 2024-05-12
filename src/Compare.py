@@ -1,8 +1,9 @@
 ##############################################
-#    Experimental Comparison                 #
-#              				                 #
+#    Experimental Comparison of Sorting      #
+#                  Benchmark              	 #
 # 		        github.com/ml3m		         #
 ##############################################
+
 import time
 import random
 from PySortAlgos import (BubbleSort,
@@ -17,6 +18,8 @@ from PySortAlgos import (BubbleSort,
                          CombSort,
                          isSorted)
 
+# !Make sure to read README.md for running guidance
+
 # this part can be tweeked
 # individual algorithms can be tested or only a range of e can be tested
 # by commenting out the algorithms you don't want to test
@@ -29,11 +32,12 @@ from PySortAlgos import (BubbleSort,
 #           cause I just edit it with vim for the paper
 
 
-START_E = 3  # 2^START_E (paper choice: 2^3 = 8)
-MAX_E = 8  # 2^MAX_E (paper choice: 2^8 = 16384)
-TRIES = 1  # precision average of how many tries
+
+START_E = 3  # 2^START_E         (paper choice: 2^3 = 8)
+MAX_E = 10  # 2^MAX_E             (paper choice: 2^14 = 16384)
+TRIES = 1  # precision average   (paper choice: TRIES = 100 ~ !caution long waiting times)
 TOTEST = (
-     #(algorithm(class),  Name,       Limit)
+   #(algorithm(class),  Name,       Limit)
     (BubbleSort,    "BubbleSort",    8),
     (SelectionSort, "SelectionSort", 8),
     (InsertSort,    "InsertSort",    8),
@@ -44,20 +48,17 @@ TOTEST = (
     (SmoothSort,    "SmoothSort",    8),
     (Timsort,       "Timsort",       8),
     (CombSort,      "CombSort",      8)
+   #(CombSort,      "CombSort",      8)   comment unwanted algorithms like this 
 )
 
-# printing of the top categories
-# nameList = ""
-# for r in TOTEST:
-#    nameList += ("\t\t" if len(nameList) > 0 else "") + r[1]
-nameList = "\t\t".join(r[1] for r in TOTEST)
 
+# printing the name of participating algorithms
+nameList = "\t\t".join(r[1] for r in TOTEST)
 print("Elements\t\t" + nameList)
 
 def generate_random_list(length):
     """the function that generates a list with random number from range (0, 999999), assuring a correct testing on totally random numbers"""
     return [random.randint(0, 999999) for _ in range(length)]
-
 def generate_random_list_small_range(length):
     """used for list_kind==5"""
     return [random.randint(0, 10) for _ in range(length)]
@@ -148,9 +149,8 @@ while list_kind <= 6:
                             print("\n\n\t0 and 1 shuffled Array\n\n")
                             print_ok6 = True
                         list_to_sort = [random.randint(0, 1) for _ in range(2**e)]
-
-
                     
+
                     # time started
                     t1 = time.time()
                     sortedlist = algorithm().sort(list_to_sort)
@@ -185,7 +185,8 @@ while list_kind <= 6:
                 if max > 0:
                     p = str(round(100*v/max, 2))
                 tp += "{:.8f}s ({:.2f}%)".format(v, float(p))
-                if v == 0: tp += "   "
+                if v == 0: 
+                    tp += "   "
             tp += "    \t"
         print(tp)
         e += 1
@@ -193,4 +194,4 @@ while list_kind <= 6:
 
 
 
-print("\nFinish from mlem :)")
+print("\nFinish! from mlem :)")
