@@ -12,8 +12,6 @@ Sorting algorithms are fundamental to computer science and are used extensively 
 - [Setup](#setup)
 - [Usage](#usage)
 - [Results](#results)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Overview
 
