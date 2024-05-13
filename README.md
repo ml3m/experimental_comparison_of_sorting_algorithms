@@ -33,6 +33,7 @@ The project allows for testing these algorithms on various types of input lists,
 ## Files
 Implementation of above sorting Algorithms:
 [find in this file](src/PySortAlgos.py)
+##
 Implementation of benchmark:
 [find in this file](src/Compare.py)
 ## Setup
