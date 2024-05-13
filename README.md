@@ -41,7 +41,7 @@ Clone or download this repository to your local machine.
 ```
 git clone https://github.com/ml3m/experimental_comparison_of_sorting_algorithms
 ```
-Navigate to the repository directory using the command line.
+Navigate to the source directory using the command line.
 ```
 cd src
 ```
