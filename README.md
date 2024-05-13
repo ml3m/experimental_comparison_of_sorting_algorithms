@@ -30,6 +30,11 @@ The main code in this repository executes sorting algorithms on different types 
 
 The project allows for testing these algorithms on various types of input lists, such as shuffled lists, almost sorted lists, reversed sorted lists, already sorted lists, small range arrays, and arrays of 0s and 1s.
 
+## Files
+Implementation of above sorting Algorithms:
+[find in this file] (src/PySortAlgos.py)
+Implementation of benchmark:
+[find in this file] (src/Compare.py)
 ## Setup
 
 To run the code, you need Python installed on your system. You can download Python from [here](https://www.python.org/downloads/).
