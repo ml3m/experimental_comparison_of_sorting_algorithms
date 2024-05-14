@@ -7,8 +7,6 @@
 #					                         #
 ##############################################
 
-# work still in progress, more sorting algorithms to be added..
-
 import math, random
 
 _defaultCompare = lambda x, y: x - y
